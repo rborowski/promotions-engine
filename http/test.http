@@ -1,7 +1,7 @@
 POST http://localhost:8000/products/1/lowest-price
 Content-Type: application/json
 Accept: application/json
-force_fail: 400
+# force_fail: 400
 
 {
   "quantity": 5,
