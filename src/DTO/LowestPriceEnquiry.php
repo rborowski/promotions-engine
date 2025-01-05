@@ -17,13 +17,13 @@ class LowestPriceEnquiry implements PromotionEnquiryInterface
   private ?string $requestCode;
 
   private ?string $requestDate;
-  
+
   private ?int $price;
-  
+
   private ?int $discountedPrice;
-  
+
   private ?int $promotionId;
-  
+
   private ?string $promotionName;
 
   public function getProduct(): ?Product
@@ -134,7 +134,7 @@ class LowestPriceEnquiry implements PromotionEnquiryInterface
     return $this;
   }
 
-  public function jsonSerialize(): array 
+  public function jsonSerialize(): array
   {
     return get_object_vars($this);
   }

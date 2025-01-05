@@ -19,26 +19,27 @@ class ProductsController extends AbstractController
 {
 
   public function __construct(
-    private readonly ProductRepository $repository,
+    private readonly ProductRepository      $repository,
     private readonly EntityManagerInterface $entityManager
-  ) {
+  )
+  {
   }
 
   #[Route('/products/{id}/lowest-price', name: 'lowest-price', methods: ['POST'])]
   public function lowestPrice(
-    Request $request,
-    int $id,
-    DTOSerializer $serializer,
+    Request                   $request,
+    int                       $id,
+    DTOSerializer             $serializer,
     PromotionsFilterInterface $promotionsFilter
   ): Response
   {
-    if($request->headers->has('force_fail')) {
+    if ($request->headers->has('force_fail')) {
       return new JsonResponse(
         ['error' => 'Promotions engine failure message'],
         $request->headers->get("force_fail")
       );
     }
-    
+
     /** @var LowestPriceEnquiry $lowestPriceEnquiry */
     $lowestPriceEnquiry = $serializer->deserialize(
       $request->getContent(),
@@ -60,7 +61,7 @@ class ProductsController extends AbstractController
 
     return new Response($responseContent, 200, ['Content-Type' => 'application/json']);
   }
-  
+
   #[Route('/products/{id}/promotions', name: 'promotions', methods: ['GET', 'POST'])]
   public function promotions(): Response
   {

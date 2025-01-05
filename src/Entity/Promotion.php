@@ -10,90 +10,90 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PromotionRepository::class)]
 class Promotion
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column]
+  private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+  #[ORM\Column(length: 255)]
+  private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $type = null;
+  #[ORM\Column(length: 255)]
+  private ?string $type = null;
 
-    #[ORM\Column]
-    private ?float $adjustment = null;
+  #[ORM\Column]
+  private ?float $adjustment = null;
 
-    #[ORM\Column]
-    private array $criteria = [];
+  #[ORM\Column]
+  private array $criteria = [];
 
   /**
    * @var Collection<int, ProductPromotion>
    */
-    #[ORM\OneToMany(targetEntity: ProductPromotion::class, mappedBy: 'promotion')]
-    private Collection $productPromotions;
+  #[ORM\OneToMany(targetEntity: ProductPromotion::class, mappedBy: 'promotion')]
+  private Collection $productPromotions;
 
-    public function __construct()
-    {
-      $this->productPromotions = new ArrayCollection();
-    }
+  public function __construct()
+  {
+    $this->productPromotions = new ArrayCollection();
+  }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+  public function getName(): ?string
+  {
+    return $this->name;
+  }
 
-    public function setName(string $name): static
-    {
-        $this->name = $name;
+  public function setName(string $name): static
+  {
+    $this->name = $name;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
+  public function getType(): ?string
+  {
+    return $this->type;
+  }
 
-    public function setType(string $type): static
-    {
-        $this->type = $type;
+  public function setType(string $type): static
+  {
+    $this->type = $type;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getAdjustment(): ?float
-    {
-        return $this->adjustment;
-    }
+  public function getAdjustment(): ?float
+  {
+    return $this->adjustment;
+  }
 
-    public function setAdjustment(float $adjustment): static
-    {
-        $this->adjustment = $adjustment;
+  public function setAdjustment(float $adjustment): static
+  {
+    $this->adjustment = $adjustment;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getCriteria(): array
-    {
-        return $this->criteria;
-    }
+  public function getCriteria(): array
+  {
+    return $this->criteria;
+  }
 
-    public function setCriteria(array $criteria): static
-    {
-        $this->criteria = $criteria;
+  public function setCriteria(array $criteria): static
+  {
+    $this->criteria = $criteria;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function getProductPromotions(): Collection
-    {
-      return $this->productPromotions;
-    }
+  public function getProductPromotions(): Collection
+  {
+    return $this->productPromotions;
+  }
 
 }

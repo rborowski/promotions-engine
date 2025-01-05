@@ -10,13 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column]
+  private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $price = null;
+  #[ORM\Column]
+  private ?int $price = null;
 
 //    /**
 //     * @var Collection<int, ProductPromotion>
@@ -29,22 +29,22 @@ class Product
 //        $this->productPromotions = new ArrayCollection();
 //    }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
 
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
+  public function getPrice(): ?int
+  {
+    return $this->price;
+  }
 
-    public function setPrice(int $price): static
-    {
-        $this->price = $price;
+  public function setPrice(int $price): static
+  {
+    $this->price = $price;
 
-        return $this;
-    }
+    return $this;
+  }
 
 //    /**
 //     * @return Collection<int, ProductPromotion>
