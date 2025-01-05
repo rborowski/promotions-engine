@@ -8,6 +8,8 @@
 /var/
 /vendor/
 /mysql/
+/.vscode/
+/.idea/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
