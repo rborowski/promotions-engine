@@ -14,7 +14,7 @@ class LowestPriceEnquiry implements PromotionEnquiryInterface
 
   private ?string $requestLocation;
 
-  private ?string $requestCode;
+  private ?string $voucherCode;
 
   private ?string $requestDate;
 
@@ -62,14 +62,14 @@ class LowestPriceEnquiry implements PromotionEnquiryInterface
     return $this;
   }
 
-  public function getRequestCode(): string|null
+  public function getVoucherCode(): string|null
   {
-    return $this->requestCode;
+    return $this->voucherCode;
   }
 
-  public function setRequestCode($requestCode): static
+  public function setVoucherCode($voucherCode): static
   {
-    $this->requestCode = $requestCode;
+    $this->voucherCode = $voucherCode;
 
     return $this;
   }

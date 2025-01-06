@@ -48,7 +48,7 @@ class PriceModifiersTest extends ServiceTestCase
     $enquiry = new LowestPriceEnquiry();
     $enquiry->setQuantity($quantity);
     $enquiry->setPrice($price);
-    $enquiry->setRequestCode("OU812");
+    $enquiry->setVoucherCode("OU812");
 
     $promotion = new Promotion();
     $promotion->setName('Voucher OU812');
