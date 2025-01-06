@@ -26,12 +26,10 @@ class ProductsController extends AbstractController
   }
 
   #[Route('/products/{id}/lowest-price', name: 'lowest-price', methods: ['POST'])]
-  public function lowestPrice(
-    Request                   $request,
-    int                       $id,
-    DTOSerializer             $serializer,
-    PromotionsFilterInterface $promotionsFilter
-  ): Response
+  public function lowestPrice(Request $request,
+    int $id,
+    DTOSerializer $serializer,
+    PromotionsFilterInterface $promotionsFilter): Response
   {
     if ($request->headers->has('force_fail')) {
       return new JsonResponse(

@@ -21,7 +21,7 @@ class LowestPriceFilterTest extends ServiceTestCase
     $enquiry->setProduct($product);
     $enquiry->setQuantity(5);
 
-    $promotions = $this->PromotionsDataProvider();
+    $promotions = $this->promotionsDataProvider();
 
     $lowestPriceFilter = $this->container->get(LowestPriceFilter::class);
 
@@ -35,7 +35,7 @@ class LowestPriceFilterTest extends ServiceTestCase
 
   }
 
-  public function PromotionsDataProvider(): array
+  public function promotionsDataProvider(): array
   {
     $promotions = [];
     $promotionOne = new Promotion();
