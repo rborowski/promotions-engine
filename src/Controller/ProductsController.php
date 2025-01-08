@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Cache\PromotionCache;
 use App\DTO\LowestPriceEnquiry;
 use App\Entity\Promotion;
 use App\Filter\PromotionsFilterInterface;
@@ -9,27 +10,36 @@ use App\Repository\ProductRepository;
 use App\Service\Serializer\DTOSerializer;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class ProductsController extends AbstractController
 {
 
   public function __construct(
-    private readonly ProductRepository      $repository,
+    private readonly ProductRepository $repository,
     private readonly EntityManagerInterface $entityManager
   )
   {
   }
 
+  /**
+   * @throws InvalidArgumentException
+   */
   #[Route('/products/{id}/lowest-price', name: 'lowest-price', methods: ['POST'])]
-  public function lowestPrice(Request $request,
+  public function lowestPrice(
+    Request $request,
     int $id,
     DTOSerializer $serializer,
-    PromotionsFilterInterface $promotionsFilter): Response
+    PromotionsFilterInterface $promotionsFilter,
+    PromotionCache $promotionsCache
+  ): Response
   {
     if ($request->headers->has('force_fail')) {
       return new JsonResponse(
@@ -49,10 +59,7 @@ class ProductsController extends AbstractController
 
     $lowestPriceEnquiry->setProduct($product);
 
-    $promotions = $this->entityManager->getRepository(Promotion::class)->findValidForProduct(
-      $product,
-      date_create_immutable($lowestPriceEnquiry->getRequestDate())
-    ); // Handling if no promotions
+    $promotions = $promotionsCache->findValidForProduct($product, $lowestPriceEnquiry->getRequestDate());
 
     $modifiedEnquiry = $promotionsFilter->apply($lowestPriceEnquiry, ...$promotions);
     $responseContent = $serializer->serialize($modifiedEnquiry, 'json');
