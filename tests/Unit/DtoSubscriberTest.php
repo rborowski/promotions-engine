@@ -29,7 +29,5 @@ class DtoSubscriberTest extends ServiceTestCase
     // When
     $eventDispatcher->dispatch($event, $event::NAME);
 
-    // Then
-
   }
 }
