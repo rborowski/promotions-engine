@@ -1,14 +1,14 @@
-POST http://localhost:8000/products/1/lowest-price
+POST http://localhost:8000/products/15/lowest-price
 Content-Type: application/json
 Accept: application/json
 # force_fail: 400
 
 {
-  "quantity": -5,
+  "quantity": 5,
   "request_location": "UK",
   "voucher_code": "OU812",
-  "request_date": "",
-  "product_id": 1
+  "request_date": "2024-12-25",
+  "product_id": 15
 }
 
 ### another
